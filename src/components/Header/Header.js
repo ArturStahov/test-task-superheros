@@ -21,6 +21,8 @@ const Header = styled.header`
   padding: 50px 0px 100px;
 `;
 const Container = styled.div`
+  display: flex;
+
   max-width: 900px;
   margin: 0 auto;
 `;
@@ -48,16 +50,17 @@ const Title = styled.h1`
   font-family: 'Bangers';
   font-weight: 400;
   color: #ffbf00;
-  text-align: center;
+
   -webkit-text-stroke-width: 3px;
   -webkit-text-stroke-color: #9a3535;
   text-transform: uppercase;
 `;
 
-export default function Headers({ title }) {
+export default function Headers({ title, children }) {
   return (
     <Header>
       <Container>
+        {children}
         <LogoWrapper>
           <GlitchClip>
             <LogoImage src={imgLogo} alt="logotype" />
