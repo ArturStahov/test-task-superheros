@@ -22,7 +22,7 @@ const ContentBlock = styled.div`
   position: relative;
   width: 70%;
   height: 70%;
-
+  max-width: 900px;
   background: url(${bgMask}) no-repeat right bottom / 30% #333447;
   border-radius: 1rem;
   transition-property: opacity;

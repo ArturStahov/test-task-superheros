@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import uniqid from 'uniqid';
 
 const Form = styled.form`
+  max-width: 600px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -76,9 +77,23 @@ const Button = styled.button`
   width: 200px;
   height: 30px;
   background-color: #ff4040;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #c09f00;
   border: none;
-  clip-path: polygon(0 0, 95% 0, 100% 100%, 5% 100%);
+  clip-path: polygon(0 0, 100% 0, 86% 100%, 14% 100%);
   cursor: pointer;
+`;
+const Title = styled.h2`
+  width: 100%;
+  font-size: 4.8rem;
+  font-family: 'Bangers';
+  font-weight: 400;
+  color: #ffbf00;
+  text-align: center;
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: #9a3535;
+  text-transform: uppercase;
 `;
 
 export default function FormCreateHeros({ onCreateHero, itemEdit }) {
@@ -147,77 +162,80 @@ export default function FormCreateHeros({ onCreateHero, itemEdit }) {
   };
 
   return (
-    <Form onSubmit={handlerSubmit}>
-      <Col>
-        <FormGroup>
-          <Label>Nick name *</Label>
-          <Input
-            value={nickName}
-            onChange={handlerInput}
-            name="nickName"
-            placeholder="30 characters max. length"
-            type="text"
-            maxLength="30"
-            required
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label>Real name</Label>
-          <Input
-            value={realName}
-            onChange={handlerInput}
-            name="realName"
-            placeholder="30 characters max. length"
-            type="text"
-            maxLength="30"
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label>Description *</Label>
-          <TextArea
-            value={description}
-            onChange={handlerInput}
-            name="description"
-            placeholder="200 characters max. length"
-            required
-          />
-        </FormGroup>
-      </Col>
-      <Col>
-        <FormGroup>
-          <Label>Super powers *</Label>
-          <TextArea
-            value={superPowers}
-            onChange={handlerInput}
-            name="superPowers"
-            placeholder="200 characters max. length"
-            maxLength="200"
-            required
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label>Catch phrase</Label>
-          <TextArea
-            value={catchPhrase}
-            onChange={handlerInput}
-            name="catchPhrase"
-            placeholder="200 characters max. length"
-            maxLength="200"
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label>Hero images *</Label>
-          <Input
-            value={images}
-            onChange={handlerInput}
-            name="images"
-            placeholder="1mb max"
-            type="text"
-            required
-          />
-        </FormGroup>
-      </Col>
-      <Button type="submit">{itemEdit ? 'Edit Hero' : 'Create Hero'}</Button>
-    </Form>
+    <>
+      <Form onSubmit={handlerSubmit}>
+        <Title>{itemEdit ? 'Edit Hero!' : 'Create Hero!'}</Title>
+        <Col>
+          <FormGroup>
+            <Label>Nick name *</Label>
+            <Input
+              value={nickName}
+              onChange={handlerInput}
+              name="nickName"
+              placeholder="30 characters max. length"
+              type="text"
+              maxLength="30"
+              required
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Real name</Label>
+            <Input
+              value={realName}
+              onChange={handlerInput}
+              name="realName"
+              placeholder="30 characters max. length"
+              type="text"
+              maxLength="30"
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Description *</Label>
+            <TextArea
+              value={description}
+              onChange={handlerInput}
+              name="description"
+              placeholder="200 characters max. length"
+              required
+            />
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup>
+            <Label>Super powers *</Label>
+            <TextArea
+              value={superPowers}
+              onChange={handlerInput}
+              name="superPowers"
+              placeholder="200 characters max. length"
+              maxLength="200"
+              required
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Catch phrase</Label>
+            <TextArea
+              value={catchPhrase}
+              onChange={handlerInput}
+              name="catchPhrase"
+              placeholder="200 characters max. length"
+              maxLength="200"
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Hero images *</Label>
+            <Input
+              value={images}
+              onChange={handlerInput}
+              name="images"
+              placeholder="1mb max"
+              type="text"
+              required
+            />
+          </FormGroup>
+        </Col>
+        <Button type="submit">{itemEdit ? 'Update!' : 'Go!'}</Button>
+      </Form>
+    </>
   );
 }

@@ -6,11 +6,13 @@ import FormCreateHero from './components/FormCreateHero/FormCreateHero';
 import HeroList from './components/HeroList/HeroList';
 import Modal from './components/Modal/Modal';
 import HeroPreviewList from './components/HeroPreviewList/HeroPreviewList';
+import AuthTab from './components/Auth/AuthTab/AuthTab';
 
 export default function App() {
   const [itemArr, setItemArr] = useState([]);
   const [itemEdit, setItemEdit] = useState(null);
   const [itemPreview, setItemPreview] = useState(null);
+  const [Auth, setAuth] = useState(false);
 
   const handlerFormCreateHero = heroObj => {
     if (itemEdit) {
@@ -39,10 +41,14 @@ export default function App() {
   return (
     <>
       <Header title="hero factory">
-        <FormCreateHero
-          onCreateHero={handlerFormCreateHero}
-          itemEdit={itemEdit}
-        />
+        {Auth ? (
+          <FormCreateHero
+            onCreateHero={handlerFormCreateHero}
+            itemEdit={itemEdit}
+          />
+        ) : (
+          <AuthTab />
+        )}
       </Header>
 
       <main>
@@ -56,7 +62,7 @@ export default function App() {
         </Section>
         {itemPreview && (
           <Modal onCloseModal={handlerCloseModal}>
-            <HeroPreviewList itemHero={itemPreview} />{' '}
+            <HeroPreviewList itemHero={itemPreview} />
           </Modal>
         )}
       </main>
