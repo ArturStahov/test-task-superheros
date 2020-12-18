@@ -4,7 +4,7 @@ const Footer = styled.footer`
   width: 100%;
   position: fixed;
   bottom: 0;
-  padding: 50px 0px 50px;
+  padding: 20px 0px 20px;
   background-color: #1b1f28;
 `;
 const Copyright = styled.p`

@@ -29,6 +29,7 @@ img {
 
 body {
   font-family: 'Montserrat';
-  background-color: #262d3d;
-  padding-bottom: 150px;
+
+  padding-bottom: 200px;
+  background: url(./images/bg/bg-bottom.png) no-repeat bottom/ 70% #262d3d;
 }

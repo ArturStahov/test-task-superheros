@@ -12,10 +12,13 @@ const Item = styled.li`
   position: relative;
   width: 250px;
   height: 300px;
-  transition: transform 0.3s ease-in-out;
+  border-radius: 1rem;
+  transition-property: transform, box-shadow;
+  transition-duration: 0.4s;
   cursor: pointer;
   &:hover {
     transform: scale(1.1);
+    box-shadow: 4px 5px 16px 4px rgba(54, 187, 255, 0.69);
   }
   &:not(:last-child) {
     margin-right: 20px;
@@ -23,7 +26,7 @@ const Item = styled.li`
 `;
 const Title = styled.h2`
   position: absolute;
-  top: 25%;
+  top: -7%;
   left: 50%;
   transform: translateX(-50%);
   font-size: 3.8rem;
@@ -35,6 +38,7 @@ const Title = styled.h2`
   text-transform: uppercase;
 `;
 const Images = styled.img`
+  border-radius: 1rem;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -45,6 +49,7 @@ const ControlWrapper = styled.div`
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
+  transition: opacity 0.3s ease-in;
 `;
 const Button = styled.button`
   width: 40px;
@@ -52,6 +57,7 @@ const Button = styled.button`
   background-color: #9a3535;
   outline: none;
   border: none;
+  border-radius: 1rem;
 
   cursor: pointer;
   &:hover .icon {
@@ -61,14 +67,33 @@ const Button = styled.button`
     margin-right: 10px;
   }
 `;
-export default function HeroLists({ itemArr, onDeleteItem, onEditItem }) {
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  filter: grayscale(70%);
+  &:hover {
+    filter: grayscale(0%);
+  }
+`;
+export default function HeroLists({
+  itemArr,
+  onDeleteItem,
+  onEditItem,
+  onPreviewItem,
+}) {
   return (
     <List>
       {itemArr.map(({ nickName, images, id }) => (
         <Item key={id}>
-          <Title>{nickName}</Title>
-          <Images src={images} alt={nickName} />
-          <ControlWrapper>
+          <Overlay onClick={() => onPreviewItem(id)}>
+            <Title>{nickName}</Title>
+            <Images src={images} alt={nickName} />
+          </Overlay>
+          <ControlWrapper className="control">
             <Button type="button" onClick={() => onDeleteItem(id)}>
               <FontAwesomeIcon
                 className="icon"

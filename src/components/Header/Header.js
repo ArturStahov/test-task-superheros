@@ -50,7 +50,7 @@ const Title = styled.h1`
   font-family: 'Bangers';
   font-weight: 400;
   color: #ffbf00;
-
+  text-align: center;
   -webkit-text-stroke-width: 3px;
   -webkit-text-stroke-color: #9a3535;
   text-transform: uppercase;

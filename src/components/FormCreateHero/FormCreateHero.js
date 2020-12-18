@@ -16,6 +16,7 @@ const Col = styled.div`
   &:not(:last-child) {
     margin-right: 20px;
   }
+  margin-bottom: 20px;
 `;
 const FormGroup = styled.label`
   width: 100%;
@@ -43,7 +44,6 @@ const Input = styled.input`
   background-color: #aba6d2;
   padding-left: 10px;
   outline: none;
-  margin-right: 10px;
   caret-color: #ff9200;
   &::placeholder {
     font-size: 1.2rem;
