@@ -28,20 +28,6 @@ img {
 }
 
 body {
-  background-color: #000000;
-}
-
-.visually-hidden:not(:focus):not(:active),
-input[type='checkbox'].visually-hidden,
-input[type='radio'].visually-hiden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  bottom: 0px;
-  padding: 0px;
-  word-spacing: nowrap;
-  clip-path: inset(100%);
-  clip: rect(0 0 0 0);
-  overflow: hidden;
-  opacity: 0;
+  font-family: 'Montserrat';
+  background-color: #262d3d;
 }
