@@ -5,13 +5,14 @@ import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 const List = styled.ul`
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
+
+  margin-bottom: 40px;
 `;
 
 const Item = styled.li`
   position: relative;
-  width: 250px;
-  height: 300px;
+  width: 200px;
+  height: 250px;
   border-radius: 1rem;
   transition-property: transform, box-shadow;
   transition-duration: 0.4s;

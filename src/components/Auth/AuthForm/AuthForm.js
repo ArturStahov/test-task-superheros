@@ -1,4 +1,7 @@
 import { useState, useContext } from 'react';
+import { error, info } from '@pnotify/core';
+import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/BrightTheme.css';
 import styled from 'styled-components';
 import FetchApiAuth from '../../../Utils/FetchApiAuth';
 import authContext from '../../../Utils/Context.js';
@@ -81,15 +84,27 @@ export default function AuthForms() {
   const handlerSubmit = e => {
     e.preventDefault();
 
-    FetchApiAuth(Email, Pass).then(data => {
-      if (!data) return;
-      const userId = data.localId;
-
-      console.log('You signed in successfully!');
-      setEmail('');
-      setPass('');
-      onLogIn(userId);
-    });
+    FetchApiAuth(Email, Pass)
+      .then(data => {
+        if (!data) return;
+        const userId = data.localId;
+        info({
+          title: 'You signed in successfully!',
+          text: 'Welcome to the Hero Factory',
+          delay: 3000,
+        });
+        console.log('You signed in successfully!');
+        setEmail('');
+        setPass('');
+        onLogIn(userId);
+      })
+      .catch(err => {
+        error({
+          title: 'Oops...!',
+          text: err,
+          delay: 3000,
+        });
+      });
 
     // тут авторизация и в контент записуем что авторизованы
   };

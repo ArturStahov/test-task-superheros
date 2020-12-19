@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '@csstools/normalize.css';
+import 'antd/dist/antd.css';
 import './fonts.css';
 import './base.css';
+
 import App from './App';
 import AuthProvider from './components/Auth/AuthProvider';
 

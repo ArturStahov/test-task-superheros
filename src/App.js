@@ -1,6 +1,5 @@
-import { useState, useContext, useEffect, useRef } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
 import Section from './components/Section/Section';
 import FormCreateHero from './components/FormCreateHero/FormCreateHero';
 import HeroList from './components/HeroList/HeroList';
@@ -11,12 +10,15 @@ import authContext from './Utils/Context';
 import ButtonLogOut from './components/ButtonLogOut/ButtonLogOut';
 import FetchAddDeleteItems from './Utils/FetchAddDeleteItem';
 import FetchGetAllItems from './Utils/FetchGetAllItems';
+import PaginationView from './components/PaginationView/PaginationView';
 
 export default function App() {
   const [itemArr, setItemArr] = useState([]);
   const [itemEdit, setItemEdit] = useState(null);
   const [itemPreview, setItemPreview] = useState(null);
   const { userID, isLoggedIn, onLogOut } = useContext(authContext);
+  const [paginateHeroList, setPaginateHeroList] = useState([]);
+  const [paginPage, setPaginPage] = useState(1);
 
   useEffect(() => {
     //Get items in first loading
@@ -30,7 +32,9 @@ export default function App() {
           setItemArr(data);
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .finally(() => handlerPaginateHeroList(1)); // finally initial first pagination page
+
     return () => {
       setItemArr([]); //clear after logout
     };
@@ -71,6 +75,12 @@ export default function App() {
   const handlerCloseModal = () => {
     setItemPreview(null);
   };
+  const handlerPaginateHeroList = (activePageNumber = 1) => {
+    setPaginPage(activePageNumber);
+  };
+  useEffect(() => {
+    setPaginateHeroList([...itemArr.slice((paginPage - 1) * 5, paginPage * 5)]);
+  }, [paginPage, itemArr]);
 
   return (
     <>
@@ -84,18 +94,24 @@ export default function App() {
           <AuthTab />
         )}
       </Header>
-
       <main>
         {isLoggedIn && <ButtonLogOut onLogOut={onLogOut} />}
-
         <Section>
           {isLoggedIn && (
-            <HeroList
-              itemArr={itemArr}
-              onDeleteItem={handlerDeleteItem}
-              onEditItem={handlerEditItem}
-              onPreviewItem={handlerOpenModal}
-            />
+            <>
+              <HeroList
+                itemArr={paginateHeroList}
+                onDeleteItem={handlerDeleteItem}
+                onEditItem={handlerEditItem}
+                onPreviewItem={handlerOpenModal}
+              />
+              {itemArr.length > 0 && (
+                <PaginationView
+                  onHandlerChange={handlerPaginateHeroList}
+                  total={itemArr.length}
+                />
+              )}
+            </>
           )}
         </Section>
         {itemPreview && (
@@ -104,7 +120,6 @@ export default function App() {
           </Modal>
         )}
       </main>
-      <Footer />
     </>
   );
 }

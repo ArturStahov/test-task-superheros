@@ -6,3 +6,5 @@ use libs:
 - react-animations
 - react-glitch-effect
 - uniqid
+- @pnotify
+- AntDesign

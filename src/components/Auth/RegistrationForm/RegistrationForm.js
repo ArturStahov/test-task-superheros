@@ -1,5 +1,9 @@
 import { useState, useContext } from 'react';
 import styled from 'styled-components';
+import { error, info } from '@pnotify/core';
+import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/BrightTheme.css';
+
 import FetchApiSignUp from '../../../Utils/FetchApiSignUp';
 import authContext from '../../../Utils/Context.js';
 
@@ -85,7 +89,11 @@ export default function RegistrationForms() {
   const handlerSubmit = e => {
     e.preventDefault();
     if (Pass !== confirmPass) {
-      console.log('Passwords are not the same! Try again!');
+      error({
+        title: 'Oops...!',
+        text: 'Passwords are not the same! Try again!',
+        delay: 3000,
+      });
     } else {
       FetchApiSignUp(Email, Pass)
         .then(data => {
@@ -96,17 +104,27 @@ export default function RegistrationForms() {
             throw message;
           } else {
             const userId = data.localId;
-            console.log(
-              userId,
-              'You have successfully registered in the system!',
-            );
+
+            info({
+              title: 'You have successfully registered in the system!',
+              text: 'Welcome to the Hero Factory',
+              delay: 3000,
+            });
+
             setEmail('');
             setPass('');
             setConfirmPass('');
             onLogIn(userId); // записал в контекст AuthProvider
           }
         })
-        .catch(error => console.log(error));
+        .catch(err => {
+          console.log(err);
+          error({
+            title: 'Oops...!',
+            text: err,
+            delay: 3000,
+          });
+        });
     }
 
     // тут регестрируемся и в контекст записуем что авторизованы и userId для работы с базой текущего пользователя

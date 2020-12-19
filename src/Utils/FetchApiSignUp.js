@@ -13,7 +13,7 @@ export default function FetchApiSignUp(email, password) {
   return fetch(
     `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`,
     options,
-  ).then(response => response.json());
+  ).then(response => {
+    return response.json();
+  });
 }
-
-//https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDYPXUmlm-nmYpYSSmo_8aZyfAbuxI_HaA
