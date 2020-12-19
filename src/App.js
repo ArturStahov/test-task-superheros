@@ -21,7 +21,6 @@ export default function App() {
   const [paginPage, setPaginPage] = useState(1);
 
   useEffect(() => {
-    //Get items in first loading
     if (!userID) {
       return;
     }
@@ -33,15 +32,13 @@ export default function App() {
         }
       })
       .catch(error => console.log(error))
-      .finally(() => handlerPaginateHeroList(1)); // finally initial first pagination page
-
+      .finally(() => handlerPaginateHeroList(1));
     return () => {
-      setItemArr([]); //clear after logout
+      setItemArr([]);
     };
   }, [userID]);
 
   useEffect(() => {
-    //PUT items every change ItemsArr
     if (!userID) {
       return;
     }
@@ -75,9 +72,11 @@ export default function App() {
   const handlerCloseModal = () => {
     setItemPreview(null);
   };
+
   const handlerPaginateHeroList = (activePageNumber = 1) => {
     setPaginPage(activePageNumber);
   };
+
   useEffect(() => {
     setPaginateHeroList([...itemArr.slice((paginPage - 1) * 5, paginPage * 5)]);
   }, [paginPage, itemArr]);

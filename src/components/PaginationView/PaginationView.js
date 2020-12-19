@@ -1,10 +1,5 @@
-import styled from 'styled-components';
 import { Pagination } from 'antd';
-
-const Container = styled.div`
-  max-width: 500px;
-  margin: 0 auto;
-`;
+import { Container } from './StyledComponent';
 
 export default function PaginationView({ total, onHandlerChange }) {
   return (
