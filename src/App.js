@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Section from './components/Section/Section';
@@ -7,12 +7,46 @@ import HeroList from './components/HeroList/HeroList';
 import Modal from './components/Modal/Modal';
 import HeroPreviewList from './components/HeroPreviewList/HeroPreviewList';
 import AuthTab from './components/Auth/AuthTab/AuthTab';
+import authContext from './Utils/Context';
+import ButtonLogOut from './components/ButtonLogOut/ButtonLogOut';
+import FetchAddDeleteItems from './Utils/FetchAddDeleteItem';
+import FetchGetAllItems from './Utils/FetchGetAllItems';
 
 export default function App() {
   const [itemArr, setItemArr] = useState([]);
   const [itemEdit, setItemEdit] = useState(null);
   const [itemPreview, setItemPreview] = useState(null);
-  const [Auth, setAuth] = useState(false);
+  const { userID, isLoggedIn, onLogOut } = useContext(authContext);
+
+  useEffect(() => {
+    //Get items in first loading
+    if (!userID) {
+      return;
+    }
+    FetchGetAllItems(userID)
+      .then(data => {
+        console.log('GetAllItems', data);
+        if (data) {
+          setItemArr(data);
+        }
+      })
+      .catch(error => console.log(error));
+    return () => {
+      setItemArr([]); //clear after logout
+    };
+  }, [userID]);
+
+  useEffect(() => {
+    //PUT items every change ItemsArr
+    if (!userID) {
+      return;
+    }
+    FetchAddDeleteItems(userID, itemArr)
+      .then(data => {
+        console.log('AddDeleteItems', data);
+      })
+      .catch(error => console.log(error));
+  }, [itemArr]);
 
   const handlerFormCreateHero = heroObj => {
     if (itemEdit) {
@@ -41,7 +75,7 @@ export default function App() {
   return (
     <>
       <Header title="hero factory">
-        {Auth ? (
+        {isLoggedIn ? (
           <FormCreateHero
             onCreateHero={handlerFormCreateHero}
             itemEdit={itemEdit}
@@ -52,13 +86,17 @@ export default function App() {
       </Header>
 
       <main>
+        {isLoggedIn && <ButtonLogOut onLogOut={onLogOut} />}
+
         <Section>
-          <HeroList
-            itemArr={itemArr}
-            onDeleteItem={handlerDeleteItem}
-            onEditItem={handlerEditItem}
-            onPreviewItem={handlerOpenModal}
-          />
+          {isLoggedIn && (
+            <HeroList
+              itemArr={itemArr}
+              onDeleteItem={handlerDeleteItem}
+              onEditItem={handlerEditItem}
+              onPreviewItem={handlerOpenModal}
+            />
+          )}
         </Section>
         {itemPreview && (
           <Modal onCloseModal={handlerCloseModal}>

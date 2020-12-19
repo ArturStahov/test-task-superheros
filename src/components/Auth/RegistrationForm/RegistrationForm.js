@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styled from 'styled-components';
 import FetchApiSignUp from '../../../Utils/FetchApiSignUp';
+import authContext from '../../../Utils/Context.js';
 
 const Form = styled.form`
   width: 280px;
@@ -62,6 +63,7 @@ export default function RegistrationForms() {
   const [Email, setEmail] = useState('');
   const [Pass, setPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
+  const { onLogIn } = useContext(authContext);
 
   const handlerInput = e => {
     const { name, value } = e.target;
@@ -93,8 +95,7 @@ export default function RegistrationForms() {
             } = data;
             throw message;
           } else {
-            const userId = data.localId; // записать в контектс
-
+            const userId = data.localId;
             console.log(
               userId,
               'You have successfully registered in the system!',
@@ -102,12 +103,13 @@ export default function RegistrationForms() {
             setEmail('');
             setPass('');
             setConfirmPass('');
+            onLogIn(userId); // записал в контекст AuthProvider
           }
         })
         .catch(error => console.log(error));
     }
 
-    // тут регестрируемся и в контекст записуем что авторизованы
+    // тут регестрируемся и в контекст записуем что авторизованы и userId для работы с базой текущего пользователя
   };
 
   return (

@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styled from 'styled-components';
-import FetchApiAutch from '../../../Utils/FetchApiAuth';
+import FetchApiAuth from '../../../Utils/FetchApiAuth';
+import authContext from '../../../Utils/Context.js';
 
 const Form = styled.form`
   width: 280px;
@@ -61,6 +62,7 @@ const Button = styled.button`
 export default function AuthForms() {
   const [Email, setEmail] = useState('');
   const [Pass, setPass] = useState('');
+  const { onLogIn } = useContext(authContext);
 
   const handlerInput = e => {
     const { name, value } = e.target;
@@ -79,13 +81,14 @@ export default function AuthForms() {
   const handlerSubmit = e => {
     e.preventDefault();
 
-    FetchApiAutch(Email, Pass).then(data => {
+    FetchApiAuth(Email, Pass).then(data => {
       if (!data) return;
-      const userId = data.localId; //записать в контекст
+      const userId = data.localId;
 
       console.log('You signed in successfully!');
       setEmail('');
       setPass('');
+      onLogIn(userId);
     });
 
     // тут авторизация и в контент записуем что авторизованы

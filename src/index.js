@@ -4,10 +4,13 @@ import '@csstools/normalize.css';
 import './fonts.css';
 import './base.css';
 import App from './App';
+import AuthProvider from './components/Auth/AuthProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </React.StrictMode>,
   document.querySelector('#root'),
 );
