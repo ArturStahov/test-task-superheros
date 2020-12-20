@@ -5,6 +5,9 @@ const Container = styled.div`
   background-color: #194763;
   border: none;
   clip-path: polygon(0 0, 100% 0, 100% 72%, 75% 100%, 25% 100%, 0 72%);
+  @media screen and (max-width: 767px) {
+    margin: 0 auto;
+  }
 `;
 const ControlWrapper = styled.div`
   width: 100%;

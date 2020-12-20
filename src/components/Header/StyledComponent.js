@@ -22,6 +22,11 @@ const Container = styled.div`
   display: flex;
   max-width: 900px;
   margin: 0 auto;
+  @media screen and (max-width: 767px) {
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    justify-content: center;
+  }
 `;
 const LogoWrapper = styled.div`
   width: 200px;
@@ -30,6 +35,9 @@ const LogoWrapper = styled.div`
   margin: 0 auto;
   color: #c6e2ff;
   animation: ${neon} 0.08s ease-in-out infinite alternate;
+  @media screen and (max-width: 767px) {
+    margin: 0 auto 40px;
+  }
 `;
 const LogoImage = styled.img`
   width: 100%;

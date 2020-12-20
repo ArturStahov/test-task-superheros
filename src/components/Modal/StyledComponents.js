@@ -33,6 +33,11 @@ const ContentBlock = styled.div`
   &.close {
     animation: 0.6s ${animOut};
   }
+  @media screen and (max-width: 767px) {
+    width: 90%;
+    height: 90%;
+    background: url(${bgMask}) no-repeat right bottom / 50% #333447;
+  }
 `;
 const ButtonClose = styled.button`
   position: absolute;

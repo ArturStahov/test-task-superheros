@@ -4,6 +4,11 @@ const List = styled.ul`
   width: 100%;
   display: flex;
   margin-bottom: 40px;
+  @media screen and (max-width: 767px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto 40px;
+  }
 `;
 
 const Item = styled.li`
@@ -20,6 +25,12 @@ const Item = styled.li`
   }
   &:not(:last-child) {
     margin-right: 20px;
+  }
+  @media screen and (max-width: 767px) {
+    &:not(:last-child) {
+      margin-right: 0px;
+      margin-bottom: 20px;
+    }
   }
 `;
 const Title = styled.h2`

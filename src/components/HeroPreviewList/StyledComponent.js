@@ -7,6 +7,9 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  @media screen and (max-width: 767px) {
+    position: relative;
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -14,6 +17,10 @@ const ImageWrapper = styled.div`
   width: 300px;
   height: 400px;
   margin-right: 20px;
+  @media screen and (max-width: 767px) {
+    width: 200px;
+    height: 300px;
+  }
 `;
 const Image = styled.img`
   width: 100%;
@@ -23,6 +30,12 @@ const Image = styled.img`
 const ContentWrapper = styled.div`
   padding-top: 20px;
   max-width: 400px;
+  @media screen and (max-width: 767px) {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `;
 const Title = styled.h2`
   font-size: 3.8rem;
