@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/test-task-superheros/static/css/main.0f06a459.chunk.css",
+    "main.js": "/test-task-superheros/static/js/main.836717e2.chunk.js",
+    "main.js.map": "/test-task-superheros/static/js/main.836717e2.chunk.js.map",
+    "runtime-main.js": "/test-task-superheros/static/js/runtime-main.bb6cbdf0.js",
+    "runtime-main.js.map": "/test-task-superheros/static/js/runtime-main.bb6cbdf0.js.map",
+    "static/css/2.810b66ef.chunk.css": "/test-task-superheros/static/css/2.810b66ef.chunk.css",
+    "static/js/2.37705b6b.chunk.js": "/test-task-superheros/static/js/2.37705b6b.chunk.js",
+    "static/js/2.37705b6b.chunk.js.map": "/test-task-superheros/static/js/2.37705b6b.chunk.js.map",
+    "index.html": "/test-task-superheros/index.html",
+    "static/css/2.810b66ef.chunk.css.map": "/test-task-superheros/static/css/2.810b66ef.chunk.css.map",
+    "static/css/main.0f06a459.chunk.css.map": "/test-task-superheros/static/css/main.0f06a459.chunk.css.map",
+    "static/js/2.37705b6b.chunk.js.LICENSE.txt": "/test-task-superheros/static/js/2.37705b6b.chunk.js.LICENSE.txt",
+    "static/media/fonts.css": "/test-task-superheros/static/media/montserrat-v15-latin-regular.b71748ae.woff2",
+    "static/media/base.css": "/test-task-superheros/static/media/bg-bottom.b31e8cba.png",
+    "static/media/bg-modal.daed5f92.png": "/test-task-superheros/static/media/bg-modal.daed5f92.png",
+    "static/media/logo.1bc00131.png": "/test-task-superheros/static/media/logo.1bc00131.png",
+    "static/media/mask_bg.7bd5cb19.png": "/test-task-superheros/static/media/mask_bg.7bd5cb19.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bb6cbdf0.js",
+    "static/css/2.810b66ef.chunk.css",
+    "static/js/2.37705b6b.chunk.js",
+    "static/css/main.0f06a459.chunk.css",
+    "static/js/main.836717e2.chunk.js"
+  ]
+}
