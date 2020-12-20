@@ -1,5 +1,6 @@
 import imgLogo from '../../images/logo/logo.png';
 import GlitchClip from 'react-glitch-effect/core/Clip';
+import PropTypes from 'prop-types';
 import {
   Title,
   LogoImage,
@@ -23,3 +24,7 @@ export default function Headers({ title, children }) {
     </Header>
   );
 }
+
+Headers.propTypes = {
+  title: PropTypes.string,
+};

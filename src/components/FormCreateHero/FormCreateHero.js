@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import uniqid from 'uniqid';
+import PropTypes from 'prop-types';
 import {
   Title,
   Button,
@@ -56,6 +57,8 @@ export default function FormCreateHeros({ onCreateHero, itemEdit }) {
     }
   };
 
+  //create hero object and clear state and form input
+  //submit hero obj in App.js
   const handlerSubmit = e => {
     e.preventDefault();
     const heroObject = {
@@ -143,7 +146,7 @@ export default function FormCreateHeros({ onCreateHero, itemEdit }) {
               value={images}
               onChange={handlerInput}
               name="images"
-              placeholder="1mb max"
+              placeholder="images url"
               type="text"
               required
             />
@@ -154,3 +157,8 @@ export default function FormCreateHeros({ onCreateHero, itemEdit }) {
     </>
   );
 }
+
+FormCreateHeros.propTypes = {
+  onCreateHero: PropTypes.func.isRequired,
+  itemEdit: PropTypes.object,
+};

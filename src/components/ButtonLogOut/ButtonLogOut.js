@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 import { Button } from './StyledComponent';
 
 export default function ButtonLogOuts({ onLogOut }) {
@@ -14,3 +15,7 @@ export default function ButtonLogOuts({ onLogOut }) {
     </Button>
   );
 }
+
+ButtonLogOuts.propTypes = {
+  onLogOut: PropTypes.func.isRequired,
+};

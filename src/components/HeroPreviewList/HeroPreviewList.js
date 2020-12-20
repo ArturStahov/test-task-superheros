@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   ImageMask,
   Text,
@@ -9,6 +10,7 @@ import {
   Container,
 } from './StyledComponent';
 
+//create preview hero content in Modal window
 export default function HeroPreviewsList({
   itemHero: {
     nickName,
@@ -30,9 +32,13 @@ export default function HeroPreviewsList({
         <Title> {nickName}</Title>
         <SubTitle>Real name: {realName}</SubTitle>
         <Text>Catch Phrase: {catchPhrase}</Text>
-        <Text>Super Powers:{superPowers}</Text>
+        <Text>Super Powers: {superPowers}</Text>
         <Text>About Hero: {description}</Text>
       </ContentWrapper>
     </Container>
   );
 }
+
+HeroPreviewsList.propTypes = {
+  itemHero: PropTypes.object.isRequired,
+};

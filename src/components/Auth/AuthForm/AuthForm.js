@@ -25,6 +25,7 @@ export default function AuthForms() {
     }
   };
 
+  //login user
   const handlerSubmit = e => {
     e.preventDefault();
     FetchApiAuth(Email, Pass)

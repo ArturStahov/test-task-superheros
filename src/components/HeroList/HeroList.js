@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 import {
   Overlay,
   Button,
@@ -10,6 +11,7 @@ import {
   List,
 } from './StyledComponent';
 
+//create hero card list from itemArr
 export default function HeroLists({
   itemArr,
   onDeleteItem,
@@ -47,3 +49,10 @@ export default function HeroLists({
     </List>
   );
 }
+
+HeroLists.propTypes = {
+  itemArr: PropTypes.array.isRequired,
+  onDeleteItem: PropTypes.func.isRequired,
+  onEditItem: PropTypes.func.isRequired,
+  onPreviewItem: PropTypes.func.isRequired,
+};

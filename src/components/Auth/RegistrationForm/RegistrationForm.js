@@ -30,6 +30,7 @@ export default function RegistrationForms() {
     }
   };
 
+  //registration new user
   const handlerSubmit = e => {
     e.preventDefault();
     if (Pass !== confirmPass) {
