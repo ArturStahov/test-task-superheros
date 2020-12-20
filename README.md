@@ -9,7 +9,12 @@ use libs:
 - @pnotify
 - AntDesign
 
-testing account: login: test@mail.com pass: 1234567
+https://super-hero-factory-f0ab8.firebaseapp.com/
+
+testing account:
+
+- login:test@mail.com
+- pass: 1234567
 
 - Для бекенда используется firebase Realtime Database
 - Вся логика пагинации, удаления и редактирования происходит на фронте
