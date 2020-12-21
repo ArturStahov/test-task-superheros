@@ -52,7 +52,6 @@ const Button = styled.button`
   font-weight: 600;
   color: #c09f00;
   border: none;
-  clip-path: polygon(0 0, 100% 0, 86% 100%, 14% 100%);
   cursor: pointer;
 `;
 
