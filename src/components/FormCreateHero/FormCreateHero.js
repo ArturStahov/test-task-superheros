@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import uniqid from 'uniqid';
+import * as action from '../../redux/hero-card/hero-card-action';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import {
   Title,
   Button,
@@ -12,7 +13,12 @@ import {
   Form,
 } from './StyledComponent';
 
-export default function FormCreateHeros({ onCreateHero, itemEdit }) {
+function FormCreateHeros({
+  onCreateItem,
+  itemEdit,
+  onEditItem,
+  onClearItemEdit,
+}) {
   const [nickName, setNickName] = useState('');
   const [realName, setRealName] = useState('');
   const [description, setDescription] = useState('');
@@ -61,16 +67,30 @@ export default function FormCreateHeros({ onCreateHero, itemEdit }) {
   //submit hero obj in App.js
   const handlerSubmit = e => {
     e.preventDefault();
-    const heroObject = {
-      nickName,
-      realName,
-      description,
-      superPowers,
-      catchPhrase,
-      images,
-      id: uniqid(),
-    };
-    onCreateHero(heroObject);
+
+    if (itemEdit) {
+      onEditItem(
+        itemEdit.id,
+        nickName,
+        realName,
+        description,
+        superPowers,
+        catchPhrase,
+        images,
+      );
+
+      onClearItemEdit(null);
+    } else {
+      onCreateItem(
+        nickName,
+        realName,
+        description,
+        superPowers,
+        catchPhrase,
+        images,
+      );
+    }
+
     setNickName('');
     setRealName('');
     setDescription('');
@@ -157,6 +177,59 @@ export default function FormCreateHeros({ onCreateHero, itemEdit }) {
     </>
   );
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onCreateItem: (
+      nickName,
+      realName,
+      description,
+      superPowers,
+      catchPhrase,
+      images,
+    ) =>
+      dispatch(
+        action.addCard(
+          nickName,
+          realName,
+          description,
+          superPowers,
+          catchPhrase,
+          images,
+        ),
+      ),
+    onEditItem: (
+      id,
+      nickName,
+      realName,
+      description,
+      superPowers,
+      catchPhrase,
+      images,
+    ) =>
+      dispatch(
+        action.editCard(
+          id,
+          nickName,
+          realName,
+          description,
+          superPowers,
+          catchPhrase,
+          images,
+        ),
+      ),
+
+    onClearItemEdit: value => dispatch(action.addItemEdit(value)),
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    itemEdit: state.itemEdit,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormCreateHeros);
 
 FormCreateHeros.propTypes = {
   onCreateHero: PropTypes.func.isRequired,
