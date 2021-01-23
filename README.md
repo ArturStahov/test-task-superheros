@@ -5,9 +5,10 @@ use libs:
 - awesome fonts icon
 - react-animations
 - react-glitch-effect
-- uniqid
 - @pnotify
-- AntDesign
+- material-ui
+- React Hook Form
+- firebase api
 
 https://super-hero-factory-f0ab8.firebaseapp.com/
 

@@ -1,113 +1,129 @@
-import { useState, useContext } from 'react';
-import { Button, Input, Label, FormGroup, Form } from './StyledComponent';
-import { error, info } from '@pnotify/core';
-import '@pnotify/core/dist/PNotify.css';
-import '@pnotify/core/dist/BrightTheme.css';
-
-import FetchApiSignUp from '../../../Utils/FetchApiSignUp';
-import authContext from '../../../Utils/Context.js';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm, Controller } from 'react-hook-form';
+import { TextField, Button } from '@material-ui/core';
+import { Form, useStyles } from './StyledComponent';
+import * as notification from '../../../Notification/errorHandler';
+import { SignUpUser } from '../../../redux/auth/auth-operation';
+import { errorMessageValue, userValue } from '../authSelector';
 
 export default function RegistrationForms() {
-  const [Email, setEmail] = useState('');
-  const [Pass, setPass] = useState('');
-  const [confirmPass, setConfirmPass] = useState('');
-  const { onLogIn } = useContext(authContext);
+  const { control, handleSubmit } = useForm();
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  let errorMessage = useSelector(errorMessageValue);
 
-  const handlerInput = e => {
-    const { name, value } = e.target;
-    switch (name) {
-      case 'Email':
-        setEmail(value);
-        break;
-      case 'Pass':
-        setPass(value);
-        break;
-      case 'confirmPass':
-        setConfirmPass(value);
-        break;
-      default:
-        return;
+  const onSubmit = ({ password, confirmPass, nickName, email }) => {
+    if (password !== confirmPass) {
+      notification.errorNotification('Passwords are not the same! Try again!');
+      return;
     }
+
+    const registrationObj = {
+      password,
+      nickName,
+      email,
+    };
+    dispatch(SignUpUser(registrationObj));
   };
 
-  //registration new user
-  const handlerSubmit = e => {
-    e.preventDefault();
-    if (Pass !== confirmPass) {
-      error({
-        title: 'Oops...!',
-        text: 'Passwords are not the same! Try again!',
-        delay: 3000,
-      });
-    } else {
-      FetchApiSignUp(Email, Pass)
-        .then(data => {
-          if (data.error) {
-            const {
-              error: { message },
-            } = data;
-            throw message;
-          } else {
-            const userId = data.localId;
-            info({
-              title: 'You have successfully registered in the system!',
-              text: 'Welcome to the Hero Factory',
-              delay: 3000,
-            });
-            setEmail('');
-            setPass('');
-            setConfirmPass('');
-            onLogIn(userId);
-          }
-        })
-        .catch(err => {
-          console.log(err);
-          error({
-            title: 'Oops...!',
-            text: err,
-            delay: 3000,
-          });
-        });
+  useEffect(() => {
+    if (errorMessage) {
+      notification.errorNotification(errorMessage);
+      return;
     }
-  };
+  }, [errorMessage]);
 
   return (
-    <Form onSubmit={handlerSubmit}>
-      <FormGroup>
-        <Label>Email*</Label>
-        <Input
-          value={Email}
-          onChange={handlerInput}
-          name="Email"
-          placeholder="30 characters max. length"
-          type="email"
-          maxLength="30"
-          required
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label>Password*(min 6 characters length)</Label>
-        <Input
-          value={Pass}
-          onChange={handlerInput}
-          name="Pass"
-          type="password"
-          autoComplete="off"
-          required
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label>Confirm Password*</Label>
-        <Input
-          value={confirmPass}
-          onChange={handlerInput}
-          name="confirmPass"
-          type="password"
-          autoComplete="off"
-          required
-        />
-      </FormGroup>
-      <Button type="submit">Submit</Button>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Controller
+        name="email"
+        control={control}
+        defaultValue=""
+        render={({ onChange, value }) => (
+          <TextField
+            type="email"
+            className={classes.inputText}
+            InputProps={{
+              className: classes.input,
+            }}
+            onChange={onChange}
+            value={value}
+            label="E-mail"
+            variant="outlined"
+            required
+          />
+        )}
+      />
+
+      <Controller
+        name="password"
+        control={control}
+        defaultValue=""
+        render={({ onChange, value }) => (
+          <TextField
+            type="password"
+            className={classes.inputText}
+            InputProps={{
+              className: classes.input,
+            }}
+            onChange={onChange}
+            value={value}
+            label="password"
+            variant="outlined"
+            required
+          />
+        )}
+      />
+
+      <Controller
+        name="confirmPass"
+        control={control}
+        defaultValue=""
+        render={({ onChange, value }) => (
+          <TextField
+            type="password"
+            className={classes.inputText}
+            InputProps={{
+              className: classes.input,
+            }}
+            onChange={onChange}
+            value={value}
+            label="confirm password"
+            variant="outlined"
+            required
+          />
+        )}
+      />
+
+      <Controller
+        name="nickName"
+        control={control}
+        defaultValue=""
+        render={({ onChange, value }) => (
+          <TextField
+            type="text"
+            className={classes.inputText}
+            InputProps={{
+              className: classes.input,
+            }}
+            onChange={onChange}
+            value={value}
+            label="you nick name"
+            variant="outlined"
+            required
+          />
+        )}
+      />
+
+      <Button
+        className={classes.buttonSubmit}
+        type="submit"
+        variant="contained"
+        color="secondary"
+      >
+        Sign Up
+      </Button>
     </Form>
   );
 }

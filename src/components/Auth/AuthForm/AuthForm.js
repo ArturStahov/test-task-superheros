@@ -1,82 +1,79 @@
-import { useState, useContext } from 'react';
-import { error, info } from '@pnotify/core';
-import '@pnotify/core/dist/PNotify.css';
-import '@pnotify/core/dist/BrightTheme.css';
-import { Button, Input, Label, FormGroup, Form } from './StyledComponent';
-import FetchApiAuth from '../../../Utils/FetchApiAuth';
-import authContext from '../../../Utils/Context.js';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm, Controller } from 'react-hook-form';
+import { TextField, Button } from '@material-ui/core';
+import { Form, useStyles } from './StyledComponent';
+import { SignInUser } from '../../../redux/auth/auth-operation';
+import { errorMessageValue } from '../authSelector';
+import * as notification from '../../../Notification/errorHandler';
 
 export default function AuthForms() {
-  const [Email, setEmail] = useState('');
-  const [Pass, setPass] = useState('');
-  const { onLogIn } = useContext(authContext);
+  const { control, handleSubmit, reset } = useForm();
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  let errorMessage = useSelector(errorMessageValue);
 
-  const handlerInput = e => {
-    const { name, value } = e.target;
-    switch (name) {
-      case 'Email':
-        setEmail(value);
-        break;
-      case 'Pass':
-        setPass(value);
-        break;
-      default:
-        return;
+  const onSubmit = data => {
+    console.log(data);
+    dispatch(SignInUser(data));
+  };
+
+  useEffect(() => {
+    if (errorMessage) {
+      notification.errorNotification(errorMessage);
+      return;
     }
-  };
-
-  //login user
-  const handlerSubmit = e => {
-    e.preventDefault();
-    FetchApiAuth(Email, Pass)
-      .then(data => {
-        if (!data) return;
-        const userId = data.localId;
-        info({
-          title: 'You signed in successfully!',
-          text: 'Welcome to the Hero Factory',
-          delay: 3000,
-        });
-        console.log('You signed in successfully!');
-        setEmail('');
-        setPass('');
-        onLogIn(userId);
-      })
-      .catch(err => {
-        error({
-          title: 'Oops...!',
-          text: err,
-          delay: 3000,
-        });
-      });
-  };
+  }, [errorMessage]);
 
   return (
-    <Form onSubmit={handlerSubmit}>
-      <FormGroup>
-        <Label>Email*</Label>
-        <Input
-          value={Email}
-          onChange={handlerInput}
-          name="Email"
-          placeholder="30 characters max. length"
-          type="email"
-          maxLength="30"
-          required
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label>Password*</Label>
-        <Input
-          value={Pass}
-          onChange={handlerInput}
-          name="Pass"
-          type="password"
-          autoComplete="off"
-          required
-        />
-      </FormGroup>
-      <Button type="submit">Submit</Button>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Controller
+        name="email"
+        control={control}
+        defaultValue=""
+        render={({ onChange, value }) => (
+          <TextField
+            type="email"
+            className={classes.inputText}
+            InputProps={{
+              className: classes.input,
+            }}
+            onChange={onChange}
+            value={value}
+            label="E-mail"
+            variant="outlined"
+            required
+          />
+        )}
+      />
+      <Controller
+        name="password"
+        control={control}
+        defaultValue=""
+        render={({ onChange, value }) => (
+          <TextField
+            type="password"
+            className={classes.inputText}
+            InputProps={{
+              className: classes.input,
+            }}
+            onChange={onChange}
+            value={value}
+            label="Password"
+            variant="outlined"
+            required
+          />
+        )}
+      />
+
+      <Button
+        className={classes.buttonSubmit}
+        type="submit"
+        variant="contained"
+        color="primary"
+      >
+        Log In
+      </Button>
     </Form>
   );
 }

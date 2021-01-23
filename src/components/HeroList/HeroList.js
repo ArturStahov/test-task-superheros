@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import * as action from '../../redux/hero-card/hero-card-action';
+import { heroItemsValue } from './hero-selector';
+import {
+  deleteHero,
+  editHero,
+} from '../../redux/hero-card/hero-card-operations';
 import PaginationView from '../PaginationView/PaginationView';
 import {
   Overlay,
@@ -16,9 +19,12 @@ import {
   List,
 } from './StyledComponent';
 
-function HeroLists({ itemArr, onDeleteItem, onEditItem, onPreviewItem }) {
+export default function HeroLists({ onPreviewItem }) {
   const [paginateHeroList, setPaginateHeroList] = useState([]);
   const [paginatePage, setPaginatePage] = useState(1);
+
+  const dispatch = useDispatch();
+  const itemArr = useSelector(heroItemsValue);
 
   const handlerPaginateHeroList = (activePageNumber = 1) => {
     setPaginatePage(activePageNumber);
@@ -37,13 +43,13 @@ function HeroLists({ itemArr, onDeleteItem, onEditItem, onPreviewItem }) {
     <>
       <List>
         {paginateHeroList.map(item => (
-          <Item key={item.id}>
+          <Item key={item.uniqId}>
             <Overlay onClick={() => onPreviewItem(item)}>
-              <Title>{item.nickName}</Title>
-              <Images src={item.images} alt={item.nickName} />
+              <Title>{item.name}</Title>
+              <Images src={item.webImageUrl} alt={item.name} />
             </Overlay>
             <ControlWrapper className="control">
-              <Button type="button" onClick={() => onDeleteItem(item.id)}>
+              <Button type="button" onClick={() => dispatch(deleteHero(item))}>
                 <FontAwesomeIcon
                   className="icon"
                   icon={faTrashAlt}
@@ -51,7 +57,7 @@ function HeroLists({ itemArr, onDeleteItem, onEditItem, onPreviewItem }) {
                   size="2x"
                 />
               </Button>
-              <Button type="button" onClick={() => onEditItem(item)}>
+              <Button type="button" onClick={() => dispatch(editHero(item))}>
                 <FontAwesomeIcon
                   className="icon"
                   icon={faEdit}
@@ -72,25 +78,3 @@ function HeroLists({ itemArr, onDeleteItem, onEditItem, onPreviewItem }) {
     </>
   );
 }
-
-const mapStateToProps = state => {
-  return {
-    itemArr: state.heroCards,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onDeleteItem: id => dispatch(action.deleteCard(id)),
-    onEditItem: item => dispatch(action.addItemEdit(item)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(HeroLists);
-
-HeroLists.propTypes = {
-  itemArr: PropTypes.array.isRequired,
-  onDeleteItem: PropTypes.func.isRequired,
-  onEditItem: PropTypes.func.isRequired,
-  onPreviewItem: PropTypes.func.isRequired,
-};

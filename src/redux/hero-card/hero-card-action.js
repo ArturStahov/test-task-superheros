@@ -1,40 +1,13 @@
 import { createAction } from '@reduxjs/toolkit';
-import uniqid from 'uniqid';
 
-export const addCard = createAction(
-  'hero-card/add',
-  (nickName, realName, description, superPowers, catchPhrase, images) => {
-    return {
-      payload: {
-        id: uniqid(),
-        nickName,
-        realName,
-        description,
-        superPowers,
-        catchPhrase,
-        images,
-      },
-    };
-  },
-);
+export const addHeroRequest = createAction('addHero/Request');
+export const addHeroSuccess = createAction('addHero/Success');
+export const addHeroError = createAction('addHero/Error');
 
-export const deleteCard = createAction('hero-card/delete');
+export const deleteHeroRequest = createAction('deleteHero/Request');
+export const deleteHeroSuccess = createAction('deleteHero/Success');
+export const deleteHeroError = createAction('deleteHero/Error');
 
-export const editCard = createAction(
-  'hero-card/edit',
-  (id, nickName, realName, description, superPowers, catchPhrase, images) => {
-    return {
-      payload: {
-        id,
-        nickName,
-        realName,
-        description,
-        superPowers,
-        catchPhrase,
-        images,
-      },
-    };
-  },
-);
-
-export const addItemEdit = createAction('hero-card/editItem');
+export const editHeroRequest = createAction('editHero/Request');
+export const editHeroSuccess = createAction('editHero/Success');
+export const editHeroError = createAction('editHero/Error');

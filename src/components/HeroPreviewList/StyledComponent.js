@@ -47,13 +47,7 @@ const Title = styled.h2`
   text-transform: uppercase;
   margin-bottom: 10px;
 `;
-const SubTitle = styled.p`
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #c03737;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-`;
+
 const Text = styled.p`
   font-size: 1.4rem;
   font-weight: 600;
@@ -75,7 +69,6 @@ const ImageMask = styled.div`
 export {
   ImageMask,
   Text,
-  SubTitle,
   Title,
   ContentWrapper,
   Image,

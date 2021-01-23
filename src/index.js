@@ -8,14 +8,11 @@ import './fonts.css';
 import './base.css';
 
 import App from './App';
-import AuthProvider from './components/Auth/AuthProvider';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
+      <App />
     </Provider>
   </React.StrictMode>,
   document.querySelector('#root'),
