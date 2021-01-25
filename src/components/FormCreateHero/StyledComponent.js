@@ -16,7 +16,10 @@ const useStyles = makeStyles(theme => ({
 
 const Title = styled.h2`
   font-size: 1.8rem;
-  color: #bf3030;
+  color: #4671d5;
+  font-size: 2.6rem;
+  font-family: 'Bangers';
+  letter-spacing: 2px;
   text-align: center;
   font-weight: 700;
   margin-bottom: 20px;

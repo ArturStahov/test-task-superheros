@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Button = styled.button`
   position: fixed;
-  left: 2%;
+  left: 22px;
   top: 12%;
   width: 40px;
   height: 40px;

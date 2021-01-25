@@ -9,24 +9,24 @@ import {
   Container,
 } from './StyledComponent';
 
-export default function HeroPreviewsList({
-  itemHero: { name, description, images },
+export default function HeroPreview({
+  itemHero: { name, descriptions, webImageUrl },
 }) {
   return (
     <Container>
       <ImageWrapper>
         <ImageMask />
-        <Image src={images} alt={name} />
+        <Image src={webImageUrl} alt={name} />
       </ImageWrapper>
 
       <ContentWrapper>
         <Title> {name}</Title>
-        <Text>About Hero: {description}</Text>
+        <Text>About Hero: {descriptions}</Text>
       </ContentWrapper>
     </Container>
   );
 }
 
-HeroPreviewsList.propTypes = {
+HeroPreview.propTypes = {
   itemHero: PropTypes.object,
 };

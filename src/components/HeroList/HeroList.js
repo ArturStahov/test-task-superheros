@@ -43,7 +43,7 @@ export default function HeroLists({ onPreviewItem }) {
     <>
       <List>
         {paginateHeroList.map(item => (
-          <Item key={item.uniqId}>
+          <Item key={item.uniqItemId}>
             <Overlay onClick={() => onPreviewItem(item)}>
               <Title>{item.name}</Title>
               <Images src={item.webImageUrl} alt={item.name} />

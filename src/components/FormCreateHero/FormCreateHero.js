@@ -25,18 +25,19 @@ export default function FormCreateHeros() {
         userId: id,
         nickName,
       };
-
-      dispatch(addHero(formData));
       reset();
       setIsClearPreviewImg(true);
+      dispatch(addHero(formData));
     } else {
       errorNotification('upload hero image!');
     }
+    setIsClearPreviewImg(false);
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Title>Create You Hero</Title>
+
       <Controller
         name="name"
         control={control}

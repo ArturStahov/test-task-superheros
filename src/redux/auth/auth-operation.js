@@ -1,18 +1,19 @@
 import db from '../../firebase/config';
 import * as action from './auth-action';
+import noIco from '../../images/ico/no-user-ico.png';
 
-export const SignInUser = ({ email, password }) => async (
-  dispatch,
-  getState,
-) => {
+export const SignInUser = ({ email, password }) => async dispatch => {
   dispatch(action.signInRequest());
   try {
     await db.auth().signInWithEmailAndPassword(email, password);
-    const { uid, displayName } = await db.auth().currentUser;
 
+    const user = await db.auth().currentUser;
+    const { uid, displayName, photoURL } = user;
+    console.log(user);
     const userObj = {
       id: uid,
       nickName: displayName,
+      photoURL: photoURL ? photoURL : noIco,
     };
     dispatch(action.signInSuccess(userObj));
   } catch (error) {
@@ -21,10 +22,7 @@ export const SignInUser = ({ email, password }) => async (
   }
 };
 
-export const SignUpUser = ({ email, password, nickName }) => async (
-  dispatch,
-  getState,
-) => {
+export const SignUpUser = ({ email, password, nickName }) => async dispatch => {
   dispatch(action.signUpRequest());
 
   try {
@@ -36,12 +34,12 @@ export const SignUpUser = ({ email, password, nickName }) => async (
 
     await db.auth().currentUser.updateProfile(update);
     const user = await db.auth().currentUser;
-
-    const { uid, displayName } = user;
+    const { uid, displayName, photoURL } = user;
 
     const userObj = {
       id: uid,
       nickName: displayName,
+      photoURL: photoURL ? photoURL : noIco,
     };
     dispatch(action.signUpSuccess(userObj));
   } catch (error) {

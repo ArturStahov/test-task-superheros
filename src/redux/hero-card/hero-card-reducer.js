@@ -2,6 +2,7 @@ import { createReducer, combineReducers } from '@reduxjs/toolkit';
 import * as action from './hero-card-action';
 
 const heroCardReducer = createReducer([], {
+  [action.getAllUserHeroSuccess]: (state, { payload }) => payload,
   [action.addHeroSuccess]: (state, { payload }) => [...state, payload],
   [action.deleteHeroSuccess]: (state, { payload }) =>
     state.filter(item => item.id !== payload),
@@ -12,6 +13,9 @@ const heroCardReducer = createReducer([], {
 });
 
 const loaderHeroReducer = createReducer(false, {
+  [action.getAllUserHeroRequest]: () => true,
+  [action.getAllUserHeroSuccess]: () => false,
+  [action.getAllUserHeroError]: () => false,
   [action.addHeroRequest]: () => true,
   [action.addHeroSuccess]: () => false,
   [action.addHeroError]: () => false,
@@ -27,6 +31,7 @@ const errorReducer = createReducer('', {
   [action.addHeroError]: (_, { payload }) => payload,
   [action.deleteHeroError]: (_, { payload }) => payload,
   [action.editHeroError]: (_, { payload }) => payload,
+  [action.getAllUserHeroError]: (_, { payload }) => payload,
 });
 
 const rootHeroCardReducer = combineReducers({

@@ -24,7 +24,6 @@ const Container = styled.div`
   margin: 0 auto;
   @media screen and (max-width: 767px) {
     flex-wrap: wrap;
-    flex-direction: column-reverse;
     justify-content: center;
   }
 `;

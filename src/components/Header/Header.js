@@ -1,30 +1,9 @@
-import imgLogo from '../../images/logo/logo.png';
-import GlitchClip from 'react-glitch-effect/core/Clip';
-import PropTypes from 'prop-types';
-import {
-  Title,
-  LogoImage,
-  LogoWrapper,
-  Header,
-  Container,
-} from './StyledComponent';
+import { Header, Container } from './StyledComponent';
 
-export default function Headers({ title, children }) {
+export default function Headers({ children }) {
   return (
     <Header>
-      <Container>
-        {children}
-        <LogoWrapper>
-          <GlitchClip>
-            <LogoImage src={imgLogo} alt="logotype" />
-          </GlitchClip>
-          <Title>{title}</Title>
-        </LogoWrapper>
-      </Container>
+      <Container>{children}</Container>
     </Header>
   );
 }
-
-Headers.propTypes = {
-  title: PropTypes.string,
-};

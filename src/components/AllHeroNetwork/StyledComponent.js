@@ -13,8 +13,8 @@ const List = styled.ul`
 
 const Item = styled.li`
   position: relative;
-  width: 100px;
-  height: 150px;
+  width: 70px;
+  height: 50px;
   border-radius: 1rem;
   transition-property: transform, box-shadow;
   transition-duration: 0.4s;
@@ -24,58 +24,21 @@ const Item = styled.li`
     box-shadow: 4px 5px 16px 4px rgba(54, 187, 255, 0.69);
   }
   &:not(:last-child) {
-    margin-right: 20px;
+    margin-right: 10px;
   }
   @media screen and (max-width: 767px) {
     &:not(:last-child) {
       margin-right: 0px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
   }
 `;
-const Title = styled.h2`
-  position: absolute;
-  top: -7%;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  font-size: 2.8rem;
-  font-family: 'Bangers';
-  font-weight: 400;
-  color: #ffbf00;
-  -webkit-text-stroke-width: 3px;
-  -webkit-text-stroke-color: #9a3535;
-  text-transform: uppercase;
-`;
+
 const Images = styled.img`
   border-radius: 1rem;
   width: 100%;
   height: 100%;
   object-fit: cover;
-`;
-const ControlWrapper = styled.div`
-  display: flex;
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  transition: opacity 0.3s ease-in;
-`;
-const Button = styled.button`
-  width: 30px;
-  height: 30px;
-  background-color: #9a3535;
-  outline: none;
-  border: none;
-  border-radius: 1rem;
-
-  cursor: pointer;
-  &:hover .icon {
-    color: #ffffff;
-  }
-  &:not(:last-child) {
-    margin-right: 10px;
-  }
 `;
 
 const Overlay = styled.div`
@@ -90,4 +53,4 @@ const Overlay = styled.div`
   }
 `;
 
-export { Overlay, Button, ControlWrapper, Images, Title, Item, List };
+export { Overlay, Images, Item, List };

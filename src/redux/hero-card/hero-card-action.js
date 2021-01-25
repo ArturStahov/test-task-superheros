@@ -1,5 +1,9 @@
 import { createAction } from '@reduxjs/toolkit';
 
+export const getAllUserHeroRequest = createAction('getAllUserHero/Request');
+export const getAllUserHeroSuccess = createAction('getAllUserHero/Success');
+export const getAllUserHeroError = createAction('getAllUserHero/Error');
+
 export const addHeroRequest = createAction('addHero/Request');
 export const addHeroSuccess = createAction('addHero/Success');
 export const addHeroError = createAction('addHero/Error');

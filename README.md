@@ -9,6 +9,7 @@ use libs:
 - material-ui
 - React Hook Form
 - firebase api
+- firebase-hooks
 
 https://super-hero-factory-f0ab8.firebaseapp.com/
 
