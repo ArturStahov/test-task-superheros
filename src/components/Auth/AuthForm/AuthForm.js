@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { TextField, Button } from '@material-ui/core';
 import { Form, useStyles } from './StyledComponent';
-import { SignInUser } from '../../../redux/auth/auth-operation';
-import { errorMessageValue } from '../authSelector';
-import * as notification from '../../../Notification/errorHandler';
+import { SignInUser } from 'redux/auth/auth-operation';
+import { errorMessageValue } from 'selectors/authSelector';
+import * as notification from 'Notification/errorHandler';
 
 export default function AuthForms() {
   const { control, handleSubmit, reset } = useForm();

@@ -1,9 +1,22 @@
 import styled from 'styled-components';
 
 const List = styled.ul`
-  width: 100%;
+  padding: 30px;
+  max-height: 500px;
+  overflow-y: scroll;
   display: flex;
-  margin-bottom: 40px;
+  width: 90%;
+  margin: 0 auto 40px;
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  &::-webkit-scrollbar-track {
+    background: #1e1e24;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ffaa00;
+  }
   @media screen and (max-width: 767px) {
     flex-wrap: wrap;
     justify-content: center;

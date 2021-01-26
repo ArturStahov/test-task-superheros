@@ -10,6 +10,7 @@ use libs:
 - React Hook Form
 - firebase api
 - firebase-hooks
+- gsap
 
 https://super-hero-factory-f0ab8.firebaseapp.com/
 

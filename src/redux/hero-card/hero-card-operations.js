@@ -42,6 +42,8 @@ export const addHero = ({
       .getDownloadURL();
     console.log(webImageUrl);
 
+    // const createdAt = db.firestore.FieldValue.serverTimestamp();
+
     // create hero obj
     const heroItem = {
       uniqItemId,

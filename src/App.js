@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import gsap from 'gsap';
+import { Bounce } from 'gsap';
 import Header from './components/Header';
 import Section from './components/Section';
 import FormCreateHero from './components/FormCreateHero';
@@ -7,25 +9,26 @@ import HeroList from './components/HeroList';
 import Modal from './components/Modal';
 import HeroPreview from './components/HeroPreview';
 import AuthTab from './components/Auth/AuthTab/AuthTab';
-
 import ButtonLogOut from './components/ButtonLogOut';
 import { AppBar } from './components/AppBar';
-import * as notification from './Notification/errorHandler';
-import { userValue } from './components/Auth/authSelector';
+import { infoNotification } from './Notification/errorHandler';
+import { userValue } from './selectors/authSelector';
 import { getAllUserHero } from './redux/hero-card/hero-card-operations';
 import { AllHeroNetwork } from './components/AllHeroNetwork';
 import Logo from 'components/Header/Logo';
-import ChatOpenButton from './components/chat/ChatOpenButton';
-import Chat from './components/chat';
+import ChatOpenButton from './components/Chat/ChatOpenButton';
+import Chat from './components/Chat';
 
 export default function App() {
   const [itemPreview, setItemPreview] = useState(null);
+  const [toggleChat, setToggleChat] = useState(false);
+  const [chatRef, setChatRef] = useState(null);
   const user = useSelector(userValue);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (user) {
-      notification.infoNotification('Welcome!');
+      infoNotification('Welcome!');
       dispatch(getAllUserHero(user));
       console.log(user);
       return;
@@ -40,6 +43,33 @@ export default function App() {
     setItemPreview(null);
   };
 
+  const openChat = () => {
+    gsap.to(chatRef.current, {
+      duration: 5,
+      delay: 0,
+      x: 0,
+      scale: 1,
+      ease: Bounce.easeOut,
+      opacity: 1,
+    });
+
+    // setToggleChat(true)
+  };
+  const closeChat = () => {
+    gsap.to(chatRef.current, {
+      duration: 3,
+      delay: 0,
+      x: -100,
+      scale: 0,
+      // ease: "elastic",
+      opacity: 0,
+    });
+    // setToggleChat(false)
+  };
+  const getChatRef = chatRef => {
+    setChatRef(chatRef);
+  };
+
   return (
     <>
       <Header>
@@ -50,8 +80,8 @@ export default function App() {
       </Header>
       <main>
         {user && <ButtonLogOut />}
-        {user && <ChatOpenButton />}
-        {user && <Chat user={user} />}
+        {user && <ChatOpenButton onOpen={openChat} />}
+        {user && <Chat user={user} onClose={closeChat} getRef={getChatRef} />}
         {user && (
           <Section title="You Hero">
             <HeroList onPreviewItem={handlerOpenModal} />

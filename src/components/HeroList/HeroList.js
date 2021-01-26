@@ -3,11 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { heroItemsValue } from './hero-selector';
-import {
-  deleteHero,
-  editHero,
-} from '../../redux/hero-card/hero-card-operations';
+import { heroItemsValue } from 'selectors/hero-selector';
+import { deleteHero, editHero } from 'redux/hero-card/hero-card-operations';
 import PaginationView from '../PaginationView/PaginationView';
 import {
   Overlay,

@@ -9,7 +9,7 @@ const ChatModal = styled.div`
   left: 0;
   top: 0;
   background-color: #3a77a6;
-  z-index: 99;
+  z-index: 9;
   border: 3px solid #001d34;
   border-bottom-right-radius: 1rem;
   box-shadow: 10px 4px 15px 0px rgba(0, 0, 0, 0.38);

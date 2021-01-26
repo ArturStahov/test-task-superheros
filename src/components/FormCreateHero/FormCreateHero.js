@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { TextField } from '@material-ui/core';
 import FileLoader from './FileLoader/FileLoader';
 import { addHero } from 'redux/hero-card/hero-card-operations';
-import { userValue } from '../Auth/authSelector';
+import { userValue } from '../../selectors/authSelector';
 import { errorNotification } from 'Notification/errorHandler';
 
 import { Button, TextArea, Form, useStyles, Title } from './StyledComponent';

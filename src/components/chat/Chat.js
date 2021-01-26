@@ -7,8 +7,12 @@ import ChatMessage from './ChatMessage/ChatMessage';
 import ChatCloseButton from './ChatCloseButton/ChatCloseButton';
 import { ChatRoom, ChatModal, Form, Input } from './StyledComponent';
 
-export default function Chat({ user }) {
+export default function Chat({ user, onClose, getRef }) {
   const dummy = useRef();
+
+  const chatModalRef = useRef(null);
+  console.log('chatModalRef', chatModalRef);
+
   const messagesRef = db.firestore().collection('messagesChat');
   const query = messagesRef.orderBy('createdAt').limitToLast(20);
 
@@ -16,9 +20,14 @@ export default function Chat({ user }) {
 
   const [formValue, setFormValue] = useState('');
 
-  // const [messageArr, setMessageArr] = useState([])
-  console.log(messageArr);
+  useEffect(() => {
+    if (chatModalRef) {
+      getRef(chatModalRef);
+    }
+  }, [chatModalRef]);
 
+  //old version (work)
+  // const [messageArr, setMessageArr] = useState([])
   // const getRealtimeData = async () => {
   //     await db.firestore().collection('messagesChat').orderBy('createdAt').limitToLast(15).onSnapshot((data) => {
   //         const dataMessage = data.docs.map(doc => ({ ...doc.data() }))
@@ -53,12 +62,9 @@ export default function Chat({ user }) {
     dummy.current.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const openChat = () => {};
-  const closeChat = () => {};
-
   return (
-    <ChatModal>
-      <ChatCloseButton onClose={closeChat} />
+    <ChatModal ref={chatModalRef}>
+      <ChatCloseButton onClose={onClose} />
       <ChatRoom>
         {messageArr &&
           messageArr.map(msg => (

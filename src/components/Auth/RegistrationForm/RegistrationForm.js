@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { TextField, Button } from '@material-ui/core';
 import { Form, useStyles } from './StyledComponent';
-import * as notification from '../../../Notification/errorHandler';
-import { SignUpUser } from '../../../redux/auth/auth-operation';
-import { errorMessageValue, userValue } from '../authSelector';
+import * as notification from 'Notification/errorHandler';
+import { SignUpUser } from 'redux/auth/auth-operation';
+import { errorMessageValue } from 'selectors/authSelector';
 
 export default function RegistrationForms() {
   const { control, handleSubmit } = useForm();

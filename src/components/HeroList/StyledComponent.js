@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const List = styled.ul`
-  width: 100%;
+  width: max-content;
   display: flex;
-  margin-bottom: 40px;
+  margin: 0 auto 40px;
   @media screen and (max-width: 767px) {
     flex-wrap: wrap;
     justify-content: center;
