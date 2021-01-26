@@ -5,11 +5,17 @@ export const getAllUserHero = user => async dispatch => {
   dispatch(action.getAllUserHeroRequest());
   try {
     //get all userHeroItem from server
-    const data = await db.firestore().collection(`heroItems${user.id}`).get();
-    const dataItems = await data.docs.map(doc => ({
-      ...doc.data(),
-      serverId: doc.id,
-    }));
+    const data = await db.firestore().collection(`publicHero`).get();
+    const dataFilter = await data.docs.filter(
+      doc => doc.data().userId === user.id,
+    );
+    const dataItems = await dataFilter.map(doc => {
+      // console.log('doc.data()userId!!!!', doc.data().userId)
+      return {
+        ...doc.data(),
+        serverId: doc.id,
+      };
+    });
     console.log('dataGetAll', dataItems);
     dispatch(action.getAllUserHeroSuccess(dataItems));
   } catch (error) {
@@ -51,15 +57,20 @@ export const addHero = ({
       descriptions,
       webImageUrl,
       nickName,
+      userId,
     };
 
-    //save item in personal folder in server
-    await db.firestore().collection(`heroItems${userId}`).add(heroItem);
+    // //save item in personal folder in server
+    // await db.firestore().collection(`heroItems${userId}`).add(heroItem);
 
     //save item in public folder in server
-    await db.firestore().collection(`publicHero`).add(heroItem);
+    const data = await db.firestore().collection(`publicHero`).add(heroItem);
+    const completedHero = {
+      ...heroItem,
+      serverId: data.id,
+    };
 
-    dispatch(action.addHeroSuccess(heroItem));
+    dispatch(action.addHeroSuccess(completedHero));
   } catch (error) {
     console.log(error);
     dispatch(action.addHeroError(error.message));

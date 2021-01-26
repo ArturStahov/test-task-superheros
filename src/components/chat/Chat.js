@@ -11,7 +11,6 @@ export default function Chat({ user, onClose, getRef }) {
   const dummy = useRef();
 
   const chatModalRef = useRef(null);
-  console.log('chatModalRef', chatModalRef);
 
   const messagesRef = db.firestore().collection('messagesChat');
   const query = messagesRef.orderBy('createdAt').limitToLast(20);
@@ -79,6 +78,7 @@ export default function Chat({ user, onClose, getRef }) {
           value={formValue}
           onChange={e => setFormValue(e.target.value)}
           placeholder="input message"
+          maxLength="50"
         />
 
         <Button

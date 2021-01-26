@@ -39,32 +39,36 @@ export default function HeroLists({ onPreviewItem }) {
   return (
     <>
       <List>
-        {paginateHeroList.map(item => (
-          <Item key={item.uniqItemId}>
-            <Overlay onClick={() => onPreviewItem(item)}>
-              <Title>{item.name}</Title>
-              <Images src={item.webImageUrl} alt={item.name} />
-            </Overlay>
-            <ControlWrapper className="control">
-              <Button type="button" onClick={() => dispatch(deleteHero(item))}>
-                <FontAwesomeIcon
-                  className="icon"
-                  icon={faTrashAlt}
-                  color="#42424B"
-                  size="2x"
-                />
-              </Button>
-              <Button type="button" onClick={() => dispatch(editHero(item))}>
-                <FontAwesomeIcon
-                  className="icon"
-                  icon={faEdit}
-                  color="#42424B"
-                  size="2x"
-                />
-              </Button>
-            </ControlWrapper>
-          </Item>
-        ))}
+        {paginateHeroList.length > 0 &&
+          paginateHeroList.map(item => (
+            <Item key={item.uniqItemId}>
+              <Overlay onClick={() => onPreviewItem(item)}>
+                <Title>{item.name}</Title>
+                <Images src={item.webImageUrl} alt={item.name} />
+              </Overlay>
+              <ControlWrapper className="control">
+                <Button
+                  type="button"
+                  onClick={() => dispatch(deleteHero(item))}
+                >
+                  <FontAwesomeIcon
+                    className="icon"
+                    icon={faTrashAlt}
+                    color="#42424B"
+                    size="2x"
+                  />
+                </Button>
+                <Button type="button" onClick={() => dispatch(editHero(item))}>
+                  <FontAwesomeIcon
+                    className="icon"
+                    icon={faEdit}
+                    color="#42424B"
+                    size="2x"
+                  />
+                </Button>
+              </ControlWrapper>
+            </Item>
+          ))}
       </List>
       {itemArr.length > 0 && (
         <PaginationView

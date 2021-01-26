@@ -8,9 +8,10 @@ import {
   ImageWrapper,
   Container,
 } from './StyledComponent';
+import Comments from './Comments/Comments';
 
 export default function HeroPreview({
-  itemHero: { name, descriptions, webImageUrl },
+  itemHero: { name, descriptions, webImageUrl, serverId },
 }) {
   return (
     <Container>
@@ -23,6 +24,8 @@ export default function HeroPreview({
         <Title> {name}</Title>
         <Text>About Hero: {descriptions}</Text>
       </ContentWrapper>
+
+      <Comments serverId={serverId} />
     </Container>
   );
 }

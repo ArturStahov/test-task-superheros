@@ -11,10 +11,6 @@ export default function ChatMessage({ message, user }) {
 
   let isUserMsg = id === user.id ? true : false;
 
-  console.log('isUserMsg', isUserMsg);
-
-  // const userMsgStyle = { flexDirection: 'row-reverse' }
-
   return (
     <>
       <MessageWrapper isUserMsg={isUserMsg}>

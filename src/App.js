@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import gsap from 'gsap';
 import { Bounce } from 'gsap';
@@ -37,6 +37,7 @@ export default function App() {
 
   const handlerOpenModal = item => {
     setItemPreview(item);
+    console.log('itemPreviewHero', item);
   };
 
   const handlerCloseModal = () => {
@@ -45,9 +46,10 @@ export default function App() {
 
   const openChat = () => {
     gsap.to(chatRef.current, {
-      duration: 5,
+      duration: 3,
       delay: 0,
       x: 0,
+      rotateY: 0,
       scale: 1,
       ease: Bounce.easeOut,
       opacity: 1,
@@ -59,9 +61,9 @@ export default function App() {
     gsap.to(chatRef.current, {
       duration: 3,
       delay: 0,
-      x: -100,
+      x: -150,
       scale: 0,
-      // ease: "elastic",
+      rotateY: 360,
       opacity: 0,
     });
     // setToggleChat(false)

@@ -2,6 +2,7 @@ import maskImage from '../../images/mask_bg.png';
 import styled from 'styled-components';
 
 const Container = styled.div`
+  position: relative;
   padding-top: 50px;
   margin: 0 auto;
   display: flex;

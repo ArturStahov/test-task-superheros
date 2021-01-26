@@ -13,6 +13,9 @@ const ChatModal = styled.div`
   border: 3px solid #001d34;
   border-bottom-right-radius: 1rem;
   box-shadow: 10px 4px 15px 0px rgba(0, 0, 0, 0.38);
+  perspective: 1000px;
+  transform: scale(0);
+  opacity: 0;
 `;
 const ChatRoom = styled.ul`
   padding: 10px;

@@ -16,6 +16,7 @@ export function AllHeroNetwork({ onPreviewItem }) {
       .onSnapshot(data => {
         const dataItems = data.docs.map(doc => ({
           ...doc.data(),
+          serverId: doc.id,
         }));
         console.log('dataGetAllRealtime', dataItems);
         setAllHero(dataItems);
