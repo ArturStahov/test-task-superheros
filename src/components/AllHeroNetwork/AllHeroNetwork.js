@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Overlay, Images, Item, List } from './StyledComponent';
 import db from 'firebase/config';
+import RatingView from '../RaitingView/RaitingView';
 
 export function AllHeroNetwork({ onPreviewItem }) {
   const [allHero, setAllHero] = useState([]);
@@ -31,6 +32,7 @@ export function AllHeroNetwork({ onPreviewItem }) {
       {allHero.map(item => (
         <Item key={item.uniqItemId}>
           <Overlay onClick={() => onPreviewItem(item)}>
+            <RatingView serverId={item.serverId} size="small" />
             <Images src={item.webImageUrl} alt={item.name} />
           </Overlay>
         </Item>

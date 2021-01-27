@@ -5,7 +5,7 @@ const heroCardReducer = createReducer([], {
   [action.getAllUserHeroSuccess]: (state, { payload }) => payload,
   [action.addHeroSuccess]: (state, { payload }) => [...state, payload],
   [action.deleteHeroSuccess]: (state, { payload }) =>
-    state.filter(item => item.id !== payload),
+    state.filter(item => item.serverId !== payload.serverId),
   [action.editHeroSuccess]: (state, { payload }) => [
     ...state.filter(item => item.id !== payload.id),
     payload,

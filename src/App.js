@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import gsap from 'gsap';
-import { Bounce } from 'gsap';
+import { Elastic } from 'gsap';
 import Header from './components/Header';
 import Section from './components/Section';
 import FormCreateHero from './components/FormCreateHero';
@@ -46,12 +46,11 @@ export default function App() {
 
   const openChat = () => {
     gsap.to(chatRef.current, {
-      duration: 3,
+      duration: 4,
       delay: 0,
       x: 0,
-      rotateY: 0,
       scale: 1,
-      ease: Bounce.easeOut,
+      ease: Elastic.easeOut.config(0.5, 0.3),
       opacity: 1,
     });
 
@@ -59,11 +58,10 @@ export default function App() {
   };
   const closeChat = () => {
     gsap.to(chatRef.current, {
-      duration: 3,
+      duration: 4,
       delay: 0,
-      x: -150,
+      x: -650,
       scale: 0,
-      rotateY: 360,
       opacity: 0,
     });
     // setToggleChat(false)

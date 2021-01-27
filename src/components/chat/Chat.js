@@ -47,7 +47,7 @@ export default function Chat({ user, onClose, getRef }) {
   const sendMessage = async e => {
     e.preventDefault();
 
-    const { id, photoURL } = user;
+    const { id, photoURL, nickName } = user;
 
     await messagesRef.add({
       text: formValue,
@@ -55,6 +55,7 @@ export default function Chat({ user, onClose, getRef }) {
       id,
       photoURL,
       uniqKey: Date.now(),
+      name: nickName,
     });
 
     setFormValue('');

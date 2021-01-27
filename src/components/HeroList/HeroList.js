@@ -58,14 +58,14 @@ export default function HeroLists({ onPreviewItem }) {
                     size="2x"
                   />
                 </Button>
-                <Button type="button" onClick={() => dispatch(editHero(item))}>
+                {/* <Button type="button" onClick={() => dispatch(editHero(item))}>
                   <FontAwesomeIcon
                     className="icon"
                     icon={faEdit}
                     color="#42424B"
                     size="2x"
                   />
-                </Button>
+                </Button> */}
               </ControlWrapper>
             </Item>
           ))}

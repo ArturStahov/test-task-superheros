@@ -15,6 +15,7 @@ const ChatModal = styled.div`
   box-shadow: 10px 4px 15px 0px rgba(0, 0, 0, 0.38);
   perspective: 1000px;
   transform: scale(0);
+  transform: translateX(-600px);
   opacity: 0;
 `;
 const ChatRoom = styled.ul`

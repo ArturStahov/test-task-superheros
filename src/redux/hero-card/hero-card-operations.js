@@ -79,6 +79,14 @@ export const addHero = ({
 
 export const deleteHero = item => async dispatch => {
   dispatch(action.deleteHeroRequest());
+  const { serverId } = item;
+  try {
+    await db.firestore().collection(`publicHero`).doc(serverId).delete();
+    dispatch(action.deleteHeroSuccess(item));
+  } catch (error) {
+    console.log(error);
+    dispatch(action.deleteHeroError(error.message));
+  }
 };
 
 export const editHero = item => async dispatch => {
