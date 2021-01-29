@@ -14,7 +14,3 @@ use libs:
 
 https://super-hero-factory-f0ab8.firebaseapp.com/
 
-testing account:
-
-- login:test@mail.com
-- pass: 1234567
